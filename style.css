@@ -1,0 +1,91 @@
+/* dasar halaman */
+body {
+  margin: 0;
+  padding: 0;
+  background: #ffcee4; /* pink lembut */
+  font-family: 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* kotak utama */
+.card {
+  position: relative;
+  width: 90vw;
+  max-width: 400px;
+  padding: 30px;
+  background: #fff0f7;
+  border: 4px dashed #ff66a3;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+h1 {
+  margin-top: 0;
+  color: #d1006c;
+  font-size: 2em;
+  letter-spacing: 1px;
+}
+
+button {
+  cursor: pointer;
+  outline: none;
+  border: none;
+  padding: 12px 24px;
+  margin: 10px;
+  font-size: 1em;
+  font-weight: bold;
+  border-radius: 12px;
+  transition: transform 0.3s ease, background 0.3s ease; /* animasi halus */
+}
+
+/* efek hover agar tombol sedikit membesar */
+button:hover {
+  transform: scale(1.05);
+}
+
+/* tombol utama */
+#btn-show {
+  background: #ff6699;
+  color: #fff;
+}
+
+/* kotak pertanyaan */
+#question-box {
+  display: none; /* muncul setelah klik */
+  margin-top: 20px;
+}
+
+#question-box p {
+  font-size: 1.2em;
+  color: #900045;
+}
+
+/* area tombol untuk mengatur posisi relatif */
+.btn-area {
+  position: relative;
+  height: 120px;
+}
+
+/* tombol iya */
+#yes-btn {
+  background: #ff99cc;
+  color: #2e003e;
+  position: relative;
+  z-index: 2;
+}
+
+/* tombol gak dulu */
+#no-btn {
+  background: #ffe6f0;
+  color: #a60056;
+  position: absolute;
+  z-index: 1;
+  /* posisi awal di tengah bawah area */
+  left: 50%;
+  transform: translateX(-50%);
+}

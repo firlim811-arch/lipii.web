@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<title>Cinta Lucu</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="card">
+  <h1>Hai kamu!</h1>
+  <button id="btn-show">klik untuk lihat</button>
+
+  <div id="question-box">
+    <p>Maukah kamu menjadi pacarku?</p>
+    <div class="btn-area">
+      <button id="yes-btn">iyaaaa</button>
+      <button id="no-btn">gak dulu</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+<script
+const btnShow = document.getElementById('btn-show');
+const questionBox = document.getElementById('question-box');
+const yesBtn = document.getElementById('yes-btn');
+const noBtn = document.getElementById('no-btn');
+const container = noBtn.parentElement; // area gerak tombol no
+
+// muncul pertanyaan setelah klik
+btnShow.addEventListener('click', () => {
+  questionBox.style.display = ('block'); }
+
+// fungsi bantu: cek apakah dua elemen saling tumpang tindih
+function isOverlap(rect1, rect2) {
+  return !(
+    rect1.right < rect2.left ||
+    rect1.left > rect2.right ||
+    rect1.bottom < rect2.top ||
+    rect1.top > rect2.bottom
+  );
+}
+
+// tombol gak dulu menghindar
+noBtn.addEventListener('mouseenter', () => {
+  const containerRect = container.getBoundingClientRect();
+  const yesRect = yesBtn.getBoundingClientRect();
+  const noRect = noBtn.getBoundingClientRect();
+
+  const btnWidth = noRect.width;
+  const btnHeight = noRect.height;
+
+  // batas area dalam container
+  const maxX = containerRect.width - btnWidth;
+  const maxY = containerRect.height - btnHeight;
+
+  let newX, newY, tries = 0;
+  do {
+    // acak posisi
+    newX = Math.random() * maxX;
+    newY = Math.random() * maxY;
+
+    // buat rect sementara untuk noBtn baru
+    const tempRect = {
+      left: containerRect.left + newX,
+      right: containerRect.left + newX + btnWidth,
+      top: containerRect.top + newY,
+      bottom: containerRect.top + newY + btnHeight
+    };
+    // cek overlap dengan yesBtn
+    if (!isOverlap(tempRect, yesRect)) break;
+    tries++;
+  } while (tries < 50); // batas percobaan untuk safety
+
+  // pasang posisi baru
+  noBtn.style.left = `${newX}px`;
+  noBtn.style.top = `${newY}px`;
+});
+
+// pesan ketika klik iya
+yesBtn.addEventListener('click', () => {
+  alert('Yey! 💖 Terima kasih sudah bilang iya!');
+});
+
+// optional: klik gak dulu
+noBtn.addEventListener('click', () => {
+  alert('Hmmm, oke, lain kali ya. 😊');
+});
+
+</script>
+</html>
